@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hanya coba coba</title>
+
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#box{
+			position: relative;
+			box-sizing: border-box;
+			background-image: linear-gradient(to bottom right, dodgerblue, cyan);
+			width: 100%;
+			height: 100vh;
+			text-align: center;
+			padding-top: 150px;
+		}
+		h1{
+			color: white;
+			font-size: 80px;
+		}
+		.wave{
+			width: 200%;
+			height: 20vh;
+			position: absolute;
+			bottom: 0px;
+			background-image: url("wave.png");
+			left: 0%;
+		}
+
+		.w-1{
+			animation: wavy 20s ease-out infinite;
+			opacity: 90%;
+		}
+
+		.w-2{
+			animation: wavy 15s ease-in-out infinite;
+			animation-delay: 1s;
+			opacity: 75%;
+		}
+
+		.w-3{
+			animation: wavy 30s ease-in-out infinite;
+			animation-delay: 2s;
+			opacity: 50%;
+		}
+
+		.w-4{
+			animation: wavy 35s ease-in-out infinite;
+			animation-delay: 3s;
+			opacity: 25%;
+		}
+
+		@keyframes wavy{
+			0%{
+				left: 0%;
+			}50%{
+				left: -90%;
+			}100%{
+				left: 0%;
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<section id="box">
+		<h1>Selamat Datang Di Websiteku</h1>
+		<div class="wave w-1"></div>
+		<div class="wave w-2"></div>
+		<div class="wave w-3"></div>
+		<div class="wave w-4"></div>
+	</section>
+<script>//=================================== Script untuk animasi di Judul website ini ====================================================
+	
+	const text= document.getElementById("text");	//mengambil element h1 (element yang akan diberi animasi)
+	const input = text.innerHTML;			//memasukan text awal di h1 ke variabel, karena nantinya text di h1 akan di hapus
+	const panjangtxt = input.length;		//variabel untuk panjang text tadi
+	let delay = 100;				//delay (semakin besar nilai variavel ini, animasi akan berjalan semakin lambat)
+	let i = 1;					//variabel untuk fungsi slice akan mengambil dari mana sampai mana
+
+	text.innerHTML = input.slice(0,1);		//mengganti text default di h1 menjadi hanya karakter pertamanya saja
+
+	var interval = setInterval(function(){		//interval untuk mengetikan teks dari karakter pertama sampai karakter akhir
+		text.innerHTML = input.slice(0, i);
+		i++;
+	},delay);
+
+</script>
+</body>
+
+</html>
