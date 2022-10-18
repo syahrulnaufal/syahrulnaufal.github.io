@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="charset" content="utf-8" />
+		<title>Snake Game</title>
+		<style>
+			body{
+				margin: 0px;
+				width: 100%;
+			}
+
+			table{
+				width: 500px;
+				height:500px;
+				padding-top: 10px;
+			}
+			td{
+				background-color: dodgerblue;
+				border: -12px solid white;
+				border-collapse: collapse;
+				height: 10px;
+				width:25px;
+			}
+			#container{
+				justify-items: center;
+				z-index: 30;
+			}
+			#row{
+				align-self: center;
+			}
+
+			#back{
+				width : 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,0.5);
+				position: absolute;
+				visibility: hidden;
+				justify-items: center;
+				display: flex;
+				text-align: center;
+				z-index: 50;
+				/*color: ghostwhite;*/
+			}
+
+			.ngeblur{
+				filter: blur(3px);
+				-webkit-filter: blur(3px);
+			}
+			#popup{
+				margin-left: auto;
+				margin-right: auto;
+				padding-bottom: 5%;
+				background-color: rgb(250,50,50);
+				display: inline-block;
+				width: 250px;
+				height: 235px;
+				margin-bottom: 15px;
+				border-radius: 8px;
+			}
+			#again{
+				margin-left: auto;
+				margin-right: auto;
+				border-radius: 8px;
+				background-color: dodgerblue;
+				display: inline-block;
+				padding-right: auto;
+				padding-left: auto;
+				width: 190px;
+				margin-top: 20px;
+				text-shadow: 1px 1px white;
+			}
+
+			#again:hover{
+				background-color: rgb(250,50,50);
+				box-shadow: 3px 5px cyan;
+			}
+
+			#again:active{
+				background-color: dodgerblue;
+			}
+
+			#box{
+				margin: auto;
+				display: inline-block;
+				justify-items: center;
+				text-align: center;
+				width: 300px;
+				height: 480px;
+				background-color: rgb(40,50,50);
+				padding-top: 25px;
+				padding-bottom: 15px;
+				border-radius: 10px;
+				box-shadow: 4px 3px cyan;
+			}
+			h1{
+				/*box-shadow: 3px 5px cyan;*/
+				/*border-radius:5px;*/
+				width: 80%;
+				height: 30%;
+				margin-left: 10%;
+				margin-right: 10%;
+				color:rgb(60,50,40);
+				font-size: 70px;
+				text-shadow: 3px 2px white;
+			}
+			h2{
+				color: rgb(60,50,40);
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="wadah" style="width:100%; height:100%; position: absolute; z-index: 20;">
+		<div id="back">
+			<div id="box">
+				<div id="popup"><h1 id="textgame">Game  Over</h1></div><br/>
+				<h2 id="highscore" style="margin-right: 0;color: white;">HighScore : 000</h2>
+				<h2 id ="Time" style="margin-right: 0;color: white;">time : 0000</h2>
+				<div id="again" onclick="window.location.reload()"><h2>Play Again</h2></div>
+			</div>
+		</div>
+		<div id="container">
+		<div id="datacontainer" style="display: block; margin-left:auto; margin-right: auto; justify-items: center; text-align: center; justify-content: center;">
+			<div id="divdata" style="margin-right:auto; margin-left:auto; display:inline-block; width:500px;text-align: left; background-color: rgb(250, 40, 40); border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+				<h2 id="dishg" style="color: white; margin-left: 5%;">Score : 000</h2>
+				<h2 id ="time" style="margin-left: 5%; color: white;">Time : 0000</h2>
+			</div>
+		</div>
+		<aside id="panelside" style="width: 150px; height: 500px; float: right; background-color: transparent; margin-right: 5px; margin-right: 5px; color: rgb(70, 80, 70); text-align: left;" ><br/>
+			<div class="text" style="margin-right: 5px; width:75%; background-color: lightgray; border-radius: 4px; padding: 5px; margin-bottom: 3px;">: Gunakan tanda anak panah untuk bergerak </div>
+			<div class="text" style="margin-right: 5px; width:75%; background-color: lightgray; border-radius: 4px; padding: 5px; margin-bottom: 3px;">: tekan tombol "esc" untuk pause</div>
+			<div class="text" style="margin-right: 5px; width:75%; background-color: lightgray; border-radius: 4px; padding: 5px; margin-bottom: 3px;">: dapatkan score 100 untuk menang</div>
+			<div class="text" style="margin-right: 5px; width:75%; background-color: lightgray; border-radius: 4px; padding: 5px; margin-bottom: 3px; margin-top: 20px;">  : <a href="https://syahrulnaufal.blogspot.com/" target="_blank" style="color: dodgerblue;">Syahrul Naufal</a></div>
+		</aside>
+		<div id="row" style="width:500px; height:500px;margin-left: auto;margin-right: auto;margin-top:0px; margin-bottom: 5px;">
+			<table id="blok">
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		</div>
+		</div>
+	</div>
+		<script>
+		const i = document.getElementsByTagName("td");
+		const kolom = 20;
+		let game = true;
+		var input;
+		var inter;
+		var ular = 5;
+		const bodyleft = [6,5,4,3,2];
+		const bodyup = [3,3,3,3,3];
+		const cadUp = [];
+		const cadLeft = [];
+		var atas = bodyup[0];
+		var kiri = bodyleft[0];
+		var inputlama;
+		let buahx = 1,buahy = 1;  //posisi buah
+		var fixedir;  //variabel untuk mengatasi jika double klik tomnol random
+		var count = 0;
+		let time = 0;
+		let highscore = 4;
+		let kecepatan = 200;
+		const win = 100;
+
+		for(let i = 0; i < ular; i++){
+			draw(bodyup[i],bodyleft[i],kolom);
+		}
+
+		if(window.innerWidth < 930){
+			document.getElementById("panelside").style.height ="0";
+			for(let l = 0; l < document.getElementsByClassName("text").length; l++){
+				document.getElementsByClassName("text")[l].style.visibility = "hidden";
+			}
+		}else if(window.innerWidth >= 930){
+			document.getElementById("panelside").style.width = ((window.innerWidth) - 550) / 2 + "px";
+			document.getElementById("panelside").style.height ="500px";
+			for(let l = 0; l < document.getElementsByClassName("text").length; l++){
+				document.getElementsByClassName("text")[l].style.visibility = "visible";
+			}
+		}
+
+				
+		window.onkeydown = function(event){
+			inputlama = input;
+			input = "";
+			clearInterval(inter);
+			inter = 0;
+			input = event.key;
+
+			if(input == "Escape"){
+			}else{
+				inter = setInterval(function(){
+				pilih();
+				time += 1;
+				update();
+
+				if(window.innerWidth < 930){
+					document.getElementById("panelside").style.height = "0px";
+					for(let l = 0; l < document.getElementsByClassName("text").length; l++){
+						document.getElementsByClassName("text")[l].style.visibility = "hidden";
+					}
+				}else if(window.innerWidth >= 930){
+					document.getElementById("panelside").style.width = ((window.innerWidth) - 550) / 2 + "px";
+					document.getElementById("panelside").style.height = "500px";
+					for(let l = 0; l < document.getElementsByClassName("text").length; l++){
+						document.getElementsByClassName("text")[l].style.visibility = "visible";
+					}
+				}
+
+				},kecepatan);
+			}
+
+		}
+
+		function youwin(){
+			document.getElementById("container").classList.add("ngeblur");
+			document.getElementById("back").style.visibility = "visible";	
+			document.getElementById("Time").innerHTML = "Time : " + time ;
+			document.getElementById("highscore").innerHTML = "Score : " + highscore;
+			document.getElementById("textgame").innerHTML = "You Win !";
+			document.getElementById("popup").style.backgroundColor = "cyan";
+			window.clearInterval(inter);
+			inter = 0 ;
+		}
+
+//fungsi untuk menampilkan highscore dan waktu
+		function update(){
+			document.getElementById("dishg").innerHTML = "Score : " + highscore;
+			document.getElementById("time").innerHTML = "Time : " + time;
+		}
+
+//membuat tubuh ular memanjang
+		function tumbuh(){
+			ular += 1;
+			if(kecepatan > 70){
+				kecepatan -= 10;
+			}
+			
+			let arah;
+			highscore += 1;
+
+			if(bodyup[ular - 1] == bodyup[ular - 2]){
+				if(bodyleft[ular - 1] < bodyleft[ular - 2]){
+					arah = "r";
+				}else if(bodyleft[ular - 1] > bodyleft[ular - 2]){
+					arah = "l";
+				}
+
+			}else if(bodyleft[ular - 1] == bodyleft[ular - 2]){
+				if(bodyup[ular - 1] < bodyup[ular - 2]){
+					arah = "d";
+				}else if(bodyup[ular - 1] > bodyup[ular - 2]){
+					arah = "u";
+				}
+			}
+
+			if(arah == "u"){
+				bodyup[ular] = bodyup[ular - 1] + 1;
+				bodyleft[ular] = bodyleft[ular - 1];
+			}else if(arah == "d"){
+				bodyup[ular] = bodyup[ular - 1] - 1;
+				bodyleft[ular] = bodyleft[ular - 1];
+			}else if(arah == "r"){
+				bodyup[ular] = bodyup[ular - 1];
+				bodyleft[ular] = bodyleft[ular - 1] - 1;
+			}else if(arah == "l"){
+				bodyup[ular] = bodyup[ular - 1];
+				bodyleft[ular] = bodyleft[ular - 1] + 1;
+			}
+			
+		}
+		
+//membuat angka random
+		function posisi(){
+			return Math.floor(Math.random() * kolom);
+		}
+
+		function spawnbuah(x,y){
+			buahx = x;
+			buahy = y;
+
+			tumbuh();
+
+//apakah koordinat random sama dengan tubuh ular
+			while(i[buahx * kolom + buahy].style.backgroundColor == "rgb(70, 80, 70)"){
+				buahx = posisi();
+				buahy = posisi();
+			}
+			
+			i[buahx * kolom + buahy].style.backgroundColor = "green";
+
+		}
+
+		function draw(up,left,col){
+			i[up * col + left].style.backgroundColor = "rgb(70,80,70)";
+		}
+
+		function drawred(up,left,col){
+			i[up * col + left].style.backgroundColor = "grey";
+		}
+
+		function del(up,left,col){
+			i[up * col + left].style.backgroundColor ="dodgerblue";
+		}
+
+		function move(dir){
+
+			if(dir == "ArrowUp" && inputlama != "ArrowDown"){
+				fixedir = dir;
+				del(bodyup[ular-2],bodyleft[ular-2],kolom);
+				
+				for(let j = 1; j < ular; j++){
+					bodyup[j] = cadUp[j - 1];
+					bodyleft[j] = cadLeft[j - 1];
+				}
+
+				if(bodyup[0] > 0){
+					bodyup[0] -= 1;
+				}else if(bodyup[0] <= 0){
+					bodyup[0] = 19;
+				}
+
+				draw(bodyup[0],bodyleft[0],kolom);
+				
+			}else if(dir == "ArrowRight" && inputlama != "ArrowLeft"){
+				fixedir = dir;	
+				del(bodyup[ular-2],bodyleft[ular-2],kolom);
+				
+				for(let j = 1; j < ular; j++){
+					bodyup[j] = cadUp[j - 1];
+					bodyleft[j] = cadLeft[j - 1];
+				}
+
+				if(bodyleft[0] < 19){
+					bodyleft[0] += 1;
+				}else if(bodyleft[0] = 19){
+					bodyleft[0] = 0;
+				}
+
+				draw(bodyup[0],bodyleft[0],kolom)
+			}else if(dir == "ArrowLeft" && inputlama != "ArrowRight"){
+				fixedir = dir;
+				del(bodyup[ular-2],bodyleft[ular-2],kolom);
+				
+				for(let j = 1; j < ular; j++){
+					bodyup[j] = cadUp[j - 1];
+					bodyleft[j] = cadLeft[j - 1];
+				}
+
+				if(bodyleft[0] > 0){
+					bodyleft[0] -= 1;
+				}else if(bodyleft[0] <= 0){
+					bodyleft[0] = 19;
+				}
+
+				draw(bodyup[0],bodyleft[0],kolom)
+
+			}else if(dir == "ArrowDown" && inputlama != "ArrowUp"){
+				fixedir = dir;
+				del(bodyup[ular-2],bodyleft[ular-2],kolom);
+				
+				for(let j = 1; j < ular; j++){
+					bodyup[j] = cadUp[j - 1];
+					bodyleft[j] = cadLeft[j - 1];
+				}
+
+				if(bodyup[0] < 19){
+					bodyup[0] += 1;
+				}else if(bodyup[0] >= 19){
+					bodyup[0] = 0;
+				}
+
+				draw(bodyup[0],bodyleft[0],kolom)
+
+			}else{
+				if(count > 2){
+					input = fixedir;
+				}else{
+					input = inputlama;	
+					count += 1;
+				}
+				
+				for(let k = 0; k < ular-1; k++){
+					drawred(bodyup[k],bodyleft[k],kolom);
+				}
+
+				setTimeout(function(){
+				for(let b = 0; b < ular; b++){
+					draw(bodyup[b],bodyleft[b],kolom);
+				}
+
+				del(bodyup[ular-1],bodyleft[ular-1],kolom);
+			},100);
+
+
+			}
+		}
+
+		function gameover(){
+			document.getElementById("container").classList.add("ngeblur");
+			document.getElementById("back").style.visibility = "visible";	
+			document.getElementById("Time").innerHTML = "Time : " + time ;
+			document.getElementById("highscore").innerHTML = "Score : " + highscore;
+		}
+
+		function checkloose(){
+			for(let u = 1; u < ular; u++){
+				if(bodyup[u] == bodyup[0]){
+					if(bodyleft[0] == bodyleft[u]){
+						clearInterval(inter);
+						inter = 0;
+						gameover();
+						clearInterval(inter);
+						inter = 0;
+					}	
+				}else{}
+			}
+		}
+	
+		function pilih(){
+			for(let k = 0; k <= ular-1; k++){
+				cadUp[k] = bodyup[k];
+				cadLeft[k] = bodyleft[k];
+			}
+
+//apakah buah sudah dimakan
+			if(i[buahx * kolom + buahy].style.backgroundColor == "green"){
+			}else{
+				spawnbuah(posisi(),posisi());
+				if(ular > win){
+					youwin();
+				}
+			}
+
+			move(input);
+			checkloose();
+		}
+
+		</script>
+	</body>
+</html>
+
+
+
