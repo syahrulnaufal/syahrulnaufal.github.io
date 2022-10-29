@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -19,12 +18,20 @@
 			height: 100vh;
 			text-align: center;
 			padding-top: 150px;
-			overflow: hidden;
+			overflow-x: hidden;
+		}
+		h3{
+			color: white;
+			font-size: 30px;
+			animation: muncul 0.7s ease-in;
+			animation-delay: 1s;
 		}
 		h1{
-			color: white;
 			font-size: 80px;
+			color: white;
+			animation: muncul 1s ease-in;
 		}
+
 		.wave{
 			width: 200%;
 			height: 20vh;
@@ -67,12 +74,23 @@
 			}
 		}
 
+		@keyframes muncul {
+			0%{
+				margin-top: -3%;
+				opacity: 0%;
+			}
+			100%{
+				margin-top:0;
+				opacity: 100%;
+			}
+		}
+
 	</style>
 </head>
 <body>
 	<section id="box">
-		<h1 id="text">Welcome</h1><br>
-		<a href="syahrulnaufal.github.io/snakegame.html"><span id='text2'>Mau main game =></span></a>
+		<h1 id="text" class="entrance">Hi, I'm Syahrul</h1>
+		<h3 id="text3" class="entrance">Blogger, Network Engineer and Progammer</h3><br>
 		<div class="wave w-1"></div>
 		<div class="wave w-2"></div>
 		<div class="wave w-3"></div>
@@ -80,29 +98,35 @@
 	</section>
 <script>//=================================== Script untuk animasi di Judul website ini ====================================================
 	
-	const text= document.getElementById("text");	//mengambil element h1 (element yang akan diberi animasi)
-	const input = text.innerHTML;			//memasukan text awal di h1 ke variabel, karena nantinya text di h1 akan di hapus
-	const panjangtxt = input.length;		//variabel untuk panjang text tadi
-	
-	const text2= document.getElementById("text2");	//mengambil element h1 (element yang akan diberi animasi)
-	const input2 = text2.innerHTML;			//memasukan text awal di h1 ke variabel, karena nantinya text di h1 akan di hapus
-	const panjangtxt = input2.length;
-	
-	let delay = 100;				//delay (semakin besar nilai variavel ini, animasi akan berjalan semakin lambat)
-	let i = 1;					//variabel untuk fungsi slice akan mengambil dari mana sampai mana
-	let j = 1;
-	
-	text2.innerHTML = input2.slice(0,1);		//mengganti text default di h1 menjadi hanya karakter pertamanya saja
+	const text= document.getElementById("text");	
+	const input = text.innerHTML;	
+	const panjangtxt = input.length;
 
-	var interval2 = setInterval(function(){		//interval untuk mengetikan teks dari karakter pertama sampai karakter akhir
-		text2.innerHTML = input2.slice(0, j);
-		j++;
+	const text3= document.getElementById("text3");
+	const input3 = text3.innerHTML;			
+	const panjangtxt3 = input3.length;
+	
+	let delay = 50;				
+	let i = 1;					
+	let k = 1;
+	
+	text3.innerHTML = input3.slice(0,0);		
+	
+	var interval3 = setInterval(function(){	
+		if(i > panjangtxt+5){
+			if(k < panjangtxt3+5){
+				text3.innerHTML = input3.slice(0, k);
+				k++;
+				clearInterval(interval);
+			}else{
+				clearInterval(interval3)
+			}
+		}	
 	},delay);
-	
 
-	text.innerHTML = input.slice(0,1);		//mengganti text default di h1 menjadi hanya karakter pertamanya saja
+	text.innerHTML = input.slice(0,0);		
 
-	var interval = setInterval(function(){		//interval untuk mengetikan teks dari karakter pertama sampai karakter akhir
+	var interval = setInterval(function(){	
 		text.innerHTML = input.slice(0, i);
 		i++;
 	},delay);
