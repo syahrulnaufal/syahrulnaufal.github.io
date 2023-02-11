@@ -1,0 +1,163 @@
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .sidenav{
+        width: 70%;
+        box-shadow: 15px 0 20px 0 rgba(70, 70, 70, 0.5);
+    }
+    .main{margin-left: 0;width: 100%;}
+    .nama-slide{margin: 3% 0 3% 0;}
+    .nav{height: 20vh;}
+    .separate{margin-left: 0;}
+}
+ 
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .sidenav{width: 20vw;}
+    .nama-slide{margin: 1% 0 1% 0;}
+    .nav{height: 20vh;}
+    .separate{margin-left: 20vw;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .sidenav{width: 20vw;}
+    .nama-slide{margin: 1% 0 1% 0;}
+    .nav{height: 20vh;}
+    .separate{margin-left: 20vw;}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .sidenav{width: 20vw;}
+    .nama-slide{margin: 1% 0 1% 0;}
+    .nav{height: 20vh;}
+    .separate{margin-left: 20vw;}
+}
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .sidenav{width: 15vw;}
+    .nama-slide{margin: 1% 0 1% 0;}
+    .nav{height: 20vh;}
+    .separate{margin-left: 15vw;}
+}
+
+.show{
+    position: relative;
+    left: 3vh;
+    top: 5vh;
+    box-shadow: 3px 3px 8px rgb(100, 100, 100);
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+    display: flex;
+}
+
+.main{
+    width: 100%;
+    height: 150vh;
+    background-color: white;
+}
+
+.nav{
+    width: 100%;
+    background-color: rgb(72, 164, 255);
+}
+
+.sidenav{
+    height: 100vh;
+    background-color: rgb(23, 129, 229);
+    position: fixed;
+    padding-top: 20px;
+}
+
+.sembunyi{display: none;}
+
+.tampil{display: block;}
+
+.close{
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    justify-content: end;
+}
+
+.tombol-close{
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    margin-right: 10%;
+}
+
+.goto{
+    display: block;
+    margin-bottom: 3vh;
+    text-decoration: none;
+    color: white;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    padding-left: 8%;
+    border-radius: 3px;
+}
+
+.goto:hover{
+    font-weight: bold;
+    padding-left: 12%;
+    background-color: rgb(15, 110, 210);
+}
+
+.goto:active{
+    font-weight: bold;
+    padding-left: 10%;
+    background-color: white;
+    color: rgb(15, 110, 210);
+}
+
+.pwd{
+    font-weight: bold;
+    padding-left: 10%;
+    background-color: rgb(15, 110, 210);
+}
+
+.pwd:hover{
+    font-weight: bold;
+    padding-left: 5%;
+    background-color: rgb(23, 129, 229);
+}
+
+.pwd:active{
+    background-color: white;
+}
+
+.slide{
+    height: 600px;
+    width: 100%;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card{
+    width: 500px;
+    height: 90%;
+    background-color: white;
+    border-radius: 5px;
+    display: block;
+    margin-left: 2%;
+}
+
+.nama-slide{
+    margin-left: 2%;
+}
+
+.logo{
+    width: 10vh;
+}
